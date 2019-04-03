@@ -81,6 +81,25 @@ public class DataHelper {
         return cursor;
     }
 
+    public Cursor getReadingsInTimeRange(long startTime, long endTime) {
+        Cursor cursor = null;
+        SQLiteDatabase db = dOpenHelper.getWritableDatabase();
+        db.beginTransaction();
+
+        try {
+            String queryString = "SELECT * FROM " + DBConstants.DB_TABLE_READINGS
+                    + " WHERE " + DBConstants.KEY_CREATED_AT + " > " + startTime
+                    + " AND " + DBConstants.KEY_CREATED_AT + " < " + endTime;
+
+            cursor = db.rawQuery(queryString, null);
+            if (cursor != null) cursor.moveToFirst();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return cursor;
+    }
+
     public void deleteReading(int id) {
         Cursor cursor = null;
         SQLiteDatabase db = dOpenHelper.getWritableDatabase();

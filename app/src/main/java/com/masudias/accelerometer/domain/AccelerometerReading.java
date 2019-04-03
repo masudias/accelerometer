@@ -12,4 +12,11 @@ public class AccelerometerReading {
         this.z = z;
         this.createdAt = System.currentTimeMillis();
     }
+
+    public AccelerometerReading(Double x, Double y, Double z, Long createdAt) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.createdAt = createdAt;
+    }
 }
