@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
                 startBtn.setEnabled(false);
                 endBtn.setEnabled(true);
-                sensorManager.registerListener(MainActivity.this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+                sensorManager.registerListener(MainActivity.this, accelerometer, SensorManager.SENSOR_DELAY_FASTEST);
             }
         });
 
