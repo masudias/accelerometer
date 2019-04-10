@@ -109,15 +109,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 //                    clientThread.start();
 //                }
                 deviceList.add(device);
-            }
-            else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
                 Log.d("MAIN", "Discovery finished");
                 for (BluetoothDevice device : deviceList) {
                     device.fetchUuidsWithSdp();
                 }
                 deviceList.clear();
-            }
-            else if (BluetoothDevice.ACTION_UUID.equals(action)) {
+            } else if (BluetoothDevice.ACTION_UUID.equals(action)) {
                 Log.d("MAIN", "UUID fetch");
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 Parcelable[] uuidExtra = intent.getParcelableArrayExtra(BluetoothDevice.EXTRA_UUID);
@@ -131,8 +129,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                         clientThread = new BluetoothClientThread(device, UUID.fromString(DEFAULT_UUID));
                         clientThread.start();
                     }
-                }
-                else {
+                } else {
                     Log.d("MAIN", "UUID is null");
                 }
             }
@@ -218,8 +215,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     startActivity(discoverableIntent);
                     serverThread = new BluetoothServerThread(bluetoothAdapter, UUID.fromString(DEFAULT_UUID));
                     serverThread.start();
-                }
-                else {
+                } else {
                     if (serverThread != null) {
                         serverThread.interrupt();
                     }
@@ -246,8 +242,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                         Log.d("MAIN", "Connecting to paired device " + device.getName());
                         clientThread = new BluetoothClientThread(device, UUID.fromString(DEFAULT_UUID));
                         clientThread.start();
-                    }
-                    else {
+                    } else {
                         //If not found any, discover new devices
                         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
                         filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
@@ -398,11 +393,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public long getTimeOffset() {
-        if (modeServer) {
-            return 0;
-        }
-        else {
-            return clientThread.getTimeOffset();
-        }
+        if (modeServer) return 0;
+        else return clientThread.getTimeOffset();
     }
 }
