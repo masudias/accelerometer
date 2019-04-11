@@ -1,7 +1,6 @@
 package com.masudias.accelerometer.activity;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -93,7 +92,7 @@ public class ShakeAndSyncActivity extends AppCompatActivity implements SensorEve
             if (passedShakeThreshold(ax, ay, az)) {
                 recordReferenceTimestamp();
                 playSoundOnCompletion();
-                startMainActivity();
+                goBackToMainActivity();
             }
             Logger.debug("Readings", ax + "," + ay + "," + az);
         }
@@ -126,9 +125,7 @@ public class ShakeAndSyncActivity extends AppCompatActivity implements SensorEve
         }
     }
 
-    private void startMainActivity() {
-        Intent intent = new Intent(ShakeAndSyncActivity.this, MainActivity.class);
-        startActivity(intent);
+    private void goBackToMainActivity() {
         finish();
     }
 
@@ -152,5 +149,11 @@ public class ShakeAndSyncActivity extends AppCompatActivity implements SensorEve
             default:
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed();
+        return; // Disable the back button press
     }
 }

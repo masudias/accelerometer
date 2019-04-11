@@ -24,7 +24,6 @@
         <activity
             android:name=".activity.ShakeAndSyncActivity"
             android:label="Shake and Sync"
-            android:parentActivityName=".activity.MainActivity"
             android:screenOrientation="portrait" />
 
         <provider
