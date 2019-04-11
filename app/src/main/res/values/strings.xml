@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">accelerometer</string>
+    <string name="select_device">Select a device</string>
+    <string name="no_device_found">No device found</string>
+    <string name="paired_devices">Paired Devices</string>
+    <string name="other_devices">Other devices</string>
+    <string name="start_scan">Scan</string>
+    <string name="no_paired_device">No paired device</string>
+    <string name="scanning">Scanning...</string>
+    <string name="sync_instruction">This screen is for synchronizing the timestamp of two devices. In order to do that, connect two devices using the bluetooth first. Then you need to use one as a host and the other as a client. The host device will send its timestamp to the other device and the client device will calculate the difference of the timestamp between these connected devices. Once the time synchronization is done, the bluetooth sockets are released and we move to the next screen for collecting accelerometer data.</string>
+    <string name="take_readings">Take Readings</string>
+    <string name="bluetooth_not_available">Bluetooth is not available</string>
 </resources>

@@ -25,6 +25,7 @@ import com.masudias.accelerometer.domain.AccelerometerReading;
 import com.masudias.accelerometer.util.ExportHelper;
 import com.masudias.accelerometer.util.InsertReadingAsyncTask;
 import com.masudias.accelerometer.util.Logger;
+import com.masudias.accelerometer.util.PreferenceManager;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private long startTime;
     private long endTime;
+    private long timeOffset;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        timeOffset = PreferenceManager.getTimeOffset(MainActivity.this);
     }
 
     private void requestPermissionFromUser() {
@@ -212,7 +215,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             ax = event.values[0];
             ay = event.values[1];
             az = event.values[2];
-            AccelerometerReading reading = new AccelerometerReading(ax, ay, az);
+            long timeStamp = System.currentTimeMillis() - timeOffset;
+            AccelerometerReading reading = new AccelerometerReading(ax, ay, az, timeStamp);
             Logger.debug("Readings", ax + "," + ay + "," + az);
 
             // Insert values in the database with timestamp

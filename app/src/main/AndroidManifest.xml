@@ -13,13 +13,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
+
+        <activity
+            android:name=".activity.SyncActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activity.MainActivity"
+            android:label="@string/take_readings"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.DeviceListActivity"
+            android:label="@string/select_device"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Dialog" />
 
         <provider
             android:name=".util.DatabaseContentProvider"
