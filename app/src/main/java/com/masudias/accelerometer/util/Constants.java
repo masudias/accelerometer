@@ -4,4 +4,6 @@ public class Constants {
     public static final String ApplicationPackage = "com.masudias.accelerometer";
     public static final String ApplicationTag = "accelerometer_reading";
     public static final boolean DEBUG = false;
+    public static final double SHAKE_THRESHOLD_POSITIVE = 12;
+    public static final double SHAKE_THRESHOLD_NEGATIVE = -12;
 }

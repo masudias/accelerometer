@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">accelerometer</string>
+    <string name="shake_instruction">In order to sync the timestamp of two different devices, you need to put them together in your hand and shake them.</string>
 </resources>

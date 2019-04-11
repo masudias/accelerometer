@@ -2,6 +2,7 @@ package com.masudias.accelerometer.activity;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private TextView axTextView;
     private TextView ayTextView;
     private TextView azTextView;
+    private Button syncTimestampBtn;
     private Button exportBtn;
     private Button exportAllBtn;
     private Button startBtn;
@@ -75,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         exportAllBtn = findViewById(R.id.export_all);
         startBtn = findViewById(R.id.start);
         endBtn = findViewById(R.id.end);
+        syncTimestampBtn = findViewById(R.id.btn_start_sync);
         setupClickListenersForButtons();
     }
 
@@ -114,6 +117,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 startBtn.setEnabled(true);
                 endBtn.setEnabled(false);
                 sensorManager.unregisterListener(MainActivity.this);
+            }
+        });
+
+        syncTimestampBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ShakeAndSyncActivity.class);
+                startActivity(intent);
             }
         });
     }

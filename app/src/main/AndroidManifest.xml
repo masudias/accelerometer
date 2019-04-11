@@ -21,6 +21,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".activity.ShakeAndSyncActivity"
+            android:label="Shake and Sync"
+            android:screenOrientation="portrait" />
+
         <provider
             android:name=".util.DatabaseContentProvider"
             android:authorities="com.masudias.accelerometer"
