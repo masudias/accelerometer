@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         timeOffset = PreferenceManager.getTimeOffset(MainActivity.this);
+        Logger.debug("Time NOW: " + (System.currentTimeMillis() + timeOffset));
     }
 
     private void requestPermissionFromUser() {
@@ -215,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             ax = event.values[0];
             ay = event.values[1];
             az = event.values[2];
-            long timeStamp = System.currentTimeMillis() - timeOffset;
+            long timeStamp = System.currentTimeMillis() + timeOffset;
             AccelerometerReading reading = new AccelerometerReading(ax, ay, az, timeStamp);
             Logger.debug("Readings", ax + "," + ay + "," + az);
 
