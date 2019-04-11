@@ -140,7 +140,7 @@ public class SyncActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent serverIntent = new Intent(SyncActivity.this, DeviceListActivity.class);
-                startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_INSECURE);
+                startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_SECURE);
             }
         });
 
@@ -183,7 +183,9 @@ public class SyncActivity extends AppCompatActivity {
 
     private void processMessageFromHost(String msg) {
         // There is nothing to process now, just stop the BTService and move to the next activity
-        sendMessage(Constants.CLIENT + System.currentTimeMillis());
+        Long currentTime = System.currentTimeMillis();
+        sendMessage(Constants.CLIENT + currentTime);
+        Logger.debug("Current time in Remote: " + currentTime);
         PreferenceManager.setTimeOffset(SyncActivity.this, 0L);
         startMainActivity();
     }
@@ -197,8 +199,13 @@ public class SyncActivity extends AppCompatActivity {
 
         Long systemTimestamp = System.currentTimeMillis();
         Long timeStampInRemoteDevice = remoteTimestamp + btOverHead;
+        Long timeOffset = timeStampInRemoteDevice - systemTimestamp;
 
-        PreferenceManager.setTimeOffset(SyncActivity.this, timeStampInRemoteDevice - systemTimestamp);
+        Logger.debug("Current time in Host: " + systemTimestamp
+                + " Offset: " + timeOffset
+                + " Remote time: " + timeStampInRemoteDevice);
+
+        PreferenceManager.setTimeOffset(SyncActivity.this, timeOffset);
 
         // There is nothing to process now, just stop the BTService and move to the next activity
         startMainActivity();
@@ -228,6 +235,7 @@ public class SyncActivity extends AppCompatActivity {
                         case BluetoothService.STATE_NONE:
                             setStatus("Not Connected");
                             findOtherDeviceBtn.setVisibility(View.VISIBLE);
+                            findOtherDeviceBtn.setEnabled(true);
                             break;
                     }
                     break;
@@ -235,7 +243,7 @@ public class SyncActivity extends AppCompatActivity {
                     byte[] writeBuf = (byte[]) msg.obj;
                     // construct a string from the buffer
                     String writeMessage = new String(writeBuf);
-                    Logger.debug(writeMessage);
+                    // Logger.debug(writeMessage);
                     break;
                 case Constants.MESSAGE_READ:
                     byte[] readBuf = (byte[]) msg.obj;

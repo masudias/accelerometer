@@ -10,4 +10,5 @@
     <string name="sync_instruction">This screen is for synchronizing the timestamp of two devices. In order to do that, connect two devices using the bluetooth first. Then you need to use one as a host and the other as a client. The host device will send its timestamp to the other device and the client device will calculate the difference of the timestamp between these connected devices. Once the time synchronization is done, the bluetooth sockets are released and we move to the next screen for collecting accelerometer data.</string>
     <string name="take_readings">Take Readings</string>
     <string name="bluetooth_not_available">Bluetooth is not available</string>
+    <string name="sync_time">Sync time</string>
 </resources>
