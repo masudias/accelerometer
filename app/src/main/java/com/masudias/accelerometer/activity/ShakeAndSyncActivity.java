@@ -31,7 +31,6 @@ public class ShakeAndSyncActivity extends AppCompatActivity implements SensorEve
     private SensorManager sensorManager;
     private Sensor accelerometer;
     private double ax, ay, az;
-    private long firstPeakTimestamp;
 
     private Button startSyncBtn;
     private TextView syncStatusTextView;
@@ -67,6 +66,8 @@ public class ShakeAndSyncActivity extends AppCompatActivity implements SensorEve
         startSyncBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startSyncBtn.setEnabled(false);
+                syncStatusTextView.setText("Start Shaking...");
                 sensorManager.registerListener(ShakeAndSyncActivity.this, accelerometer, SensorManager.SENSOR_DELAY_FASTEST);
             }
         });

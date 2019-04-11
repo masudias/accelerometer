@@ -35,7 +35,7 @@ public class ExportHelper {
             readings.add(new AccelerometerReading(ax, ay, az, createdAt));
         } while (cursor.moveToNext());
 
-        createCSVFile(fileName, readings);
+        createCSVFile(context, fileName, readings);
     }
 
     public static void exportDataWithTimeRange(Context context, String fileName, Long startTime, Long endTime) {
@@ -58,10 +58,10 @@ public class ExportHelper {
             readings.add(new AccelerometerReading(ax, ay, az, createdAt));
         } while (cursor.moveToNext());
 
-        createCSVFile(fileName, readings);
+        createCSVFile(context, fileName, readings);
     }
 
-    private static void createCSVFile(String fileName, ArrayList<AccelerometerReading> readings) {
+    private static void createCSVFile(Context context, String fileName, ArrayList<AccelerometerReading> readings) {
 
         File directory = new File(Environment.getExternalStorageDirectory() + File.separator + "readings");
         if (!directory.exists()) directory.mkdirs();
@@ -88,9 +88,11 @@ public class ExportHelper {
             FileWriter out = new FileWriter(csvFile);
             out.write(sb.toString());
             out.close();
+            Toast.makeText(context, "CSV File created successfully!", Toast.LENGTH_LONG).show();
 
         } catch (Exception e) {
             e.printStackTrace();
+            Toast.makeText(context, "ERROR Creating CSV File!", Toast.LENGTH_LONG).show();
         }
     }
 }
