@@ -26,6 +26,7 @@ import com.masudias.accelerometer.domain.AccelerometerReading;
 import com.masudias.accelerometer.util.ExportHelper;
 import com.masudias.accelerometer.util.InsertReadingAsyncTask;
 import com.masudias.accelerometer.util.Logger;
+import com.masudias.accelerometer.util.PreferenceManager;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -151,7 +152,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         String fileName = input.getText().toString();
+
                         if (!fileName.isEmpty()) {
+                            fileName = fileName + "_" + PreferenceManager.getReferenceTimestamp(MainActivity.this);
                             ExportHelper.exportAllData(MainActivity.this, fileName);
                         } else {
                             Toast.makeText(MainActivity.this, "Please put a file name", Toast.LENGTH_LONG).show();
@@ -186,6 +189,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     public void onClick(DialogInterface dialog, int which) {
                         String fileName = input.getText().toString();
                         if (!fileName.isEmpty() && startTime != 0 && endTime != 0) {
+                            fileName = fileName + "_" + PreferenceManager.getReferenceTimestamp(MainActivity.this);
                             ExportHelper.exportDataWithTimeRange(MainActivity.this, fileName, startTime, endTime);
                         } else {
                             if (fileName.isEmpty())
