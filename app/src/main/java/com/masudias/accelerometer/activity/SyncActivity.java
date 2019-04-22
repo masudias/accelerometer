@@ -129,7 +129,7 @@ public class SyncActivity extends AppCompatActivity {
 
         // If the adapter is null, then Bluetooth is not supported
         if (mBluetoothAdapter == null) {
-            Toast.makeText(SyncActivity.this, getString(R.string.bluetooth_not_available), Toast.LENGTH_LONG).show();
+            Toast.makeText(SyncActivity.this, "Bluetooth not available", Toast.LENGTH_LONG).show();
             finish();
         }
     }
